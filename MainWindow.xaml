@@ -4,9 +4,404 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FrameManager"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Frame Manager" Height="768" Width="1200">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ThemeFile.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <DockPanel Height="30" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top" FontFamily="Tahoma" FontSize="16" Margin="2">
+                <MenuItem Header="File" Width="80">
+                    <MenuItem Header="_New" Click="MenuItem_Click_8" />
+                    <MenuItem Header="_Search" Click="MenuItem_Click_9" />
+                    <Separator/>
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+                <MenuItem Header="Edit" Width="80">
+                    <MenuItem Header="Species Items" Click="MenuItem_Click"/>
+                    <MenuItem Header="Cope Items" Click="MenuItem_Click_4"/>
+                    <MenuItem Header="Panels Items" Click="MenuItem_Click_1"/>
+                    <MenuItem Header="Edge Items" Click="MenuItem_Click_2"/>
+                    <MenuItem Header="Drawer Items" Click="MenuItem_Click_3" />
+                    <MenuItem Header="Types" HorizontalAlignment="Left" Width="155.07">
+                        <MenuItem Header="Arch List" Click="MenuItem_Click_5" />
+                        <MenuItem Header="Cathedral List" Click="MenuItem_Click_6" />
+                        <MenuItem Header="Classic" Click="MenuItem_Click_7" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Settings" Click="MenuItem_Click_10"/>
+            </Menu>
+        </DockPanel>
+        <StackPanel Margin="10,30,10,10">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Customer" Width="70" Height="30" HorizontalAlignment="Right" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4"/>
+                        <TextBox Width="120" Text="{Binding CustomerName}" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Job" Width="70"  Height="30" HorizontalAlignment="Right" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4"/>
+                        <TextBox Width="120" Text="{Binding JobNumber}"  Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" TextChanged="TextBox_TextChanged"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Batch" Width="70" Height="30" HorizontalAlignment="Right" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4"/>
+                        <ComboBox x:Name="cmbBatch" Width="120" DisplayMemberPath="Name" Height="30" SelectedItem="{Binding BatchName}" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"  IsEditable="True"/>
+                    </StackPanel>
+
+                    
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Cope" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                    <ComboBox x:Name="cmbCope" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCope}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Species" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <ComboBox x:Name="cmbSpecies" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSpecies}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Panel" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <ComboBox x:Name="cmbPanel" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedPanel}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Edge" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <ComboBox x:Name="cmbEdge" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedEdge}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Drawer" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <ComboBox x:Name="cmbDrawer" DisplayMemberPath="Name" SelectedItem="{Binding SelectedDrawer}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Panel Type" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <ComboBox x:Name="cmbPanelType" SelectedItem="{Binding SelectedPanelType}" Width="120" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"/>
+                    </StackPanel>
+                    <CheckBox Content="Haunch" Width="80" Height="30" IsChecked="{Binding Haunch}" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <GroupBox Header="Rail Widths" FontFamily="Tahoma" FontWeight="Bold">
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBox Text="{Binding TopRailWidth}" Width="60" HorizontalAlignment="Center" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" Height="30"  GotFocus="TextBox_GotFocus" GotMouseCapture="TextBox_GotMouseCapture"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding LeftRailWidth}" Width="60" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" Height="30"  GotFocus="TextBox_GotFocus"/>
+                                <TextBox Text="{Binding MiddleRailWidth}" Width="60" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" Height="30"   GotFocus="TextBox_GotFocus"/>
+                                <TextBox Text="{Binding RightRailWidth}" Width="60" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" Height="30"   GotFocus="TextBox_GotFocus"/>
+                            </StackPanel>
+                            <TextBox Text="{Binding BottomRailWidth}" HorizontalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" Height="30"   GotFocus="TextBox_GotFocus"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Hinges" Width="70" HorizontalAlignment="Right"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Height="30"/>
+                        <TextBox  Text="{Binding HingeCount}" Width="60" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"  GotFocus="TextBox_GotFocus"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Overlay" Width="70" Height="30" HorizontalAlignment="Right" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4"/>
+                        <TextBox Width="60" Text="{Binding Overlay}" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"  GotFocus="TextBox_GotFocus"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Thickness" Width="70" Height="30" HorizontalAlignment="Right" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" />
+                        <TextBox Width="60" Text="{Binding Thickness}" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4"  GotFocus="TextBox_GotFocus"/>
+                    </StackPanel>
+
+                    <Button Content="Add Item" Width="140" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" Click="Button_Click" Height="30" GotFocus="TextBox_GotFocus"/>
+                </StackPanel>
+                <StackPanel Width="120" VerticalAlignment="Bottom">
+                    <Button Height="75" Content="Print" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" Click="Button_Click_5"/>
+                    <Button Content="New Order" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" Click="Button_Click_3"/>
+                    <Button Content="Save Order" Height="30" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Margin="4" Click="Button_Click_2" />
+                </StackPanel>
+            </StackPanel>
+            <TabControl Height="500">
+                <TabItem Header="Frames" Width="150">
+                    <StackPanel Orientation="Horizontal" Height="480" HorizontalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Door Opening"  FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Margin="182,0,0,0"/>
+                                <TextBlock Text="Door Size" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Margin="212,0,0,0"/>
+                                <TextBlock Text="Rails" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Margin="114,0,0,0"/>
+                                <TextBlock Text="Panels" FontFamily="Tahoma" FontWeight="Bold" TextAlignment="Right" Padding="4" Margin="157,0,0,0"/>
+                            </StackPanel>
+                            <ListView Width="Auto" x:Name="lsvDoorOpening" Height="450" >
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Height" Value="30"/>
+                                        <Setter Property="FontFamily" Value="Tahoma"/>
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridView.ColumnHeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            </Style>
+                                        </GridView.ColumnHeaderContainerStyle>
+                                        <GridViewColumn Header="QTY" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding Qty}" TextAlignment="Center" HorizontalAlignment="Center"  Width="55"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus" GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Width" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding OpenWidth}" TextAlignment="Center" HorizontalAlignment="Center" Width="75"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus"  GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Height" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding OpenHeight}" TextAlignment="Center" HorizontalAlignment="Center" Width="75"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus"  GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="3-4" Width="40">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ComboBox SelectedValue="{Binding ThreeQuarters}"  HorizontalContentAlignment="Center" Width="55">
+                                                        <ComboBox.ItemsSource>
+                                                            <x:Array Type="{x:Type sys:String}">
+                                                                <sys:String>2</sys:String>
+                                                                <sys:String>3</sys:String>
+                                                                <sys:String>4</sys:String>
+                                                            </x:Array>
+                                                        </ComboBox.ItemsSource>
+                                                    </ComboBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Split" Width="40">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox IsChecked="{Binding Split}" HorizontalAlignment="Center" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="China" Width="45">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox IsChecked="{Binding China}" HorizontalAlignment="Center"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Style" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" BorderThickness="0,0,2,0" >
+                                                        <ComboBox SelectedValue="{Binding DoorStyle}"  HorizontalContentAlignment="Center" Width="55">
+                                                            <ComboBox.ItemsSource>
+                                                                <x:Array Type="{x:Type sys:String}">
+                                                                    <sys:String>A</sys:String>
+                                                                    <sys:String>C</sys:String>
+                                                                    <sys:String>NC</sys:String>
+                                                                    <sys:String>FF</sys:String>
+                                                                    <sys:String>5P</sys:String>
+                                                                </x:Array>
+                                                            </ComboBox.ItemsSource>
+                                                        </ComboBox>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="QTY" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding DoorQty}" TextAlignment="Center"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus"  GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Width" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding DoorWidth}"  TextAlignment="Center"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus"  GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Height" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" BorderThickness="0,0,2,0" >
+                                                        <TextBox Text="{Binding DoorHeight}" TextAlignment="Center"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus" GotMouseCapture="TextBox_GotMouseCapture"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Width" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding RailWidth}" TextAlignment="Center" GotFocus="TextBox_GotFocus"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Height" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+
+                                                    <TextBlock Text="{Binding RailHeight}" TextAlignment="Center" GotFocus="TextBox_GotFocus"/>
+
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="P" Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" BorderThickness="2,0,2,0" >
+                                                        <TextBlock Text="{Binding P}" TextAlignment="Center"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Width" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding PanelWidth}" TextAlignment="Center" GotFocus="TextBox_GotFocus"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Height" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding PanelHeight}" TextAlignment="Center"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Qty" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" BorderThickness="0,0,1,0" >
+                                                        <TextBlock Text="{Binding PanelQty}" TextAlignment="Center" GotFocus="TextBox_GotFocus"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="SF" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" BorderThickness="0,0,1,0" >
+                                                        <TextBlock Text="{Binding SqFt}" TextAlignment="Center"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+
+                                        <GridViewColumn Header="Delete" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Content="Delete" Width="Auto" Click="Button_Click_1" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Calculated Rails" Width="150">
+                    <StackPanel>
+                        <Button Content="Generate Rails" Width="100" Height="35" Click="Button_Click_4"/>
+                        <ListView Width="auto" Height="450" Margin="5" x:Name="lsvRails">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Height" Value="30"/>
+                                    <Setter Property="FontFamily" Value="Tahoma"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+
+                                    <GridViewColumn Header="Parent" Width="60">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ParentId}" TextAlignment="Center" HorizontalAlignment="Center"  Width="55"  PreviewTextInput="NumberValidationTextBox" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Rail Width" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Text="{Binding RailWidth}" TextAlignment="Center" HorizontalAlignment="Center"  Width="55"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus" GotMouseCapture="TextBox_GotMouseCapture"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Rail Length" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Text="{Binding RailLength}" TextAlignment="Center" HorizontalAlignment="Center" Width="75"  PreviewTextInput="NumberValidationTextBox" GotFocus="TextBox_GotFocus"  GotMouseCapture="TextBox_GotMouseCapture"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Rail Thickness" Width="110">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding RailThickness}" Width="110" TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Species" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Material}" Width="100"  TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Type" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Type}" Width="100"  TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Cope" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding CopeName}" Width="100"  TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Overriden" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Overridden}" Width="100"  TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Processed" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Processed}" Width="100" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </Window>

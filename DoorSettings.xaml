@@ -1,0 +1,314 @@
+﻿<Window x:Class="FrameManager.DoorSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrameManager"
+        mc:Ignorable="d"
+        Title="Settings" Height="500" Width="800">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TreeView Width="110">
+                <TreeViewItem Header="Settings" Selected="TreeViewItem_Selected"/>
+                <TreeViewItem Header="Printing" Selected="TreeViewItem_Selected_1"/>
+                <TreeViewItem Header="Cope" Selected="TreeViewItem_Selected_2"/>
+                <TreeViewItem Header="Species" Selected="TreeViewItem_Selected_3"/>
+                <TreeViewItem Header="Panel" Selected="TreeViewItem_Selected_4" />
+                <TreeViewItem Header="Edge" Selected="TreeViewItem_Selected_5" />
+                <TreeViewItem Header="Drawer" Selected="TreeViewItem_Selected_6"/>
+                <TreeViewItem Header="Archs">
+                    <TreeViewItem Header="Types" Selected="TreeViewItem_Selected_7" />
+                    <TreeViewItem Header="Sizes" Selected="TreeViewItem_Selected_8" />
+                </TreeViewItem>
+            </TreeView>
+            <GroupBox BorderBrush="Black" BorderThickness="2" x:Name="grpSetting">
+                <StackPanel Width="660" Height="430">
+                    <StackPanel x:Name="stkSettings" Visibility="{Binding SettingsVisiblity}">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Tenon Length" Width="120"/>
+                            <TextBox Text="{Binding TenonLength}" Width="100" HorizontalContentAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Data Location" Width="120"/>
+                            <TextBox Text="{Binding DataLocation}" Width="100" HorizontalContentAlignment="Center" />
+                            <Button Content="Change" Width="80" Click="Button_Click_13"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel x:Name="stkPrinting" Visibility="{Binding PrintingVisibility}" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Printer" Width="120"/>
+                            <ComboBox ItemsSource="{Binding Printers}" Width="120"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="PaperSize" Width="120"/>
+                            <ComboBox ItemsSource="{Binding PageSize}" Width="120"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Content="Landscape" IsChecked="{Binding PrintLandscape}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel x:Name="stkCope" Visibility="{Binding CopeVisibility}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
+                                <TextBlock Text="Name" Width="120" Margin="5"/>
+                                <TextBox Text="{Binding SelectedCope.Name}" Width="100" Margin="5" />
+                                <Button Content="Add as New" Width="100"  Margin="3" x:Name="btnAddCope" Click="btnAddCope_Click"/>
+                                <Button Content="Update" Width="80" Margin="3" x:Name="btnUpdateCope" Click="btnUpdateCope_Click"/>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Margin" Width="120" Margin="5"/>
+                                <TextBox x:Name="txtCopeMargin" Text="{Binding SelectedCope.Margin}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Tongue" Width="120" Margin="5"/>
+                                <TextBox x:Name="txtCopeTounge" Text="{Binding SelectedCope.Tongue}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Profile Width" Width="120" Margin="5"/>
+                                <TextBox x:Name="txtCopeProfileWidth" Text="{Binding SelectedCope.ProfileWidth}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Height Change Amount" Width="120" Margin="5"/>
+                                <TextBox x:Name="txtHeightChangeAmount" Text="{Binding SelectedCope.ChangeAmount}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Width="580" Height="150" Margin="5">
+                                <ListView  Width="Auto" x:Name="lsvCope" SelectionChanged="lsvCope_SelectionChanged" SelectedValue="{Binding SelectedCope}" Height="150" ItemsSource="{Binding Copes}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Tongue" Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Tongue}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Margin" Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Margin}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Profile Width" Width="100">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding ProfileWidth}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Change Amt" Width="100">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding ChangeAmount}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Delete" Width="60">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Content="Delete" Click="Button_Click" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel x:Name="stkSpecies" Visibility="{Binding SpeciesVisibility}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,20,15,10">
+                            <TextBlock Text="Name" Width="80" Margin="5"/>
+                            <TextBox Text="{Binding SelectedSpecies.Name}" Width="100" Margin="5" />
+                            <Button Content="Add as New" Width="100"  Margin="3" Click="Button_Click_2"/>
+                            <Button Content="Update" Width="80" Margin="3" Click="Button_Click_3" />
+
+                        </StackPanel>
+                        <StackPanel Width="250" Height="150" Margin="5">
+                            <ListView  Width="Auto" x:Name="lsvSpecies" SelectedValue="{Binding SelectedSpecies}" SelectionChanged="lsvSpecies_SelectionChanged" Height="150" ItemsSource="{Binding Species}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Name" Width="160">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+
+                                        <GridViewColumn Header="Delete" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Content="Delete" Click="Button_Click_1"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stkPanels" Visibility="{Binding PanelVisibility}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
+                            <TextBlock Text="Name" Width="80" Margin="5"/>
+                            <TextBox Text="{Binding SelectedPanel.Name}" Width="100" Margin="5" />
+                            <Button Content="Add as New" Width="100"  Margin="3" Click="Button_Click_5"/>
+                            <Button Content="Update" Width="80" Margin="3" Click="Button_Click_6"/>
+
+                        </StackPanel>
+                        <StackPanel Width="250" Height="150" Margin="5">
+                            <ListView  Width="Auto" x:Name="lsvPanel" SelectedValue="{Binding SelectedPanel}" SelectionChanged="lsvPanel_SelectionChanged" Height="150" ItemsSource="{Binding Panels}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Name" Width="160">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+
+                                        <GridViewColumn Header="Delete" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Content="Delete" Click="Button_Click_4" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stkEdges" Visibility="{Binding EdgeVisibility}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
+                                <TextBlock Text="Name" Width="80" Margin="5"/>
+                                <TextBox Text="{Binding SelectedEdge.Name}" Width="100" Margin="5" />
+                                <Button Content="Add as New" Width="100"  Margin="3" Click="Button_Click_7"/>
+                                <Button Content="Update" Width="80" Margin="3" Click="Button_Click_8" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Value" Width="80" Margin="5"/>
+                                <TextBox Text="{Binding SelectedEdge.Value}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Width="300" Height="150" Margin="5">
+                                <ListView  Width="Auto" x:Name="lsvEdge" SelectedValue="{Binding SelectedEdge}" SelectionChanged="lsvEdge_SelectionChanged" Height="150" ItemsSource="{Binding Edges}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Value" Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Value}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Delete" Width="60">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Content="Delete" Click="Button_Click_9" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stkDrawer" Visibility="{Binding DrawerVisibility}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
+                                <TextBlock Text="Name" Width="80" Margin="5"/>
+                                <TextBox Text="{Binding SelectedDrawer.Name}" Width="100" Margin="5" />
+                                <Button Content="Add as New" Width="100"  Margin="3" Click="Button_Click_10"/>
+                                <Button Content="Update" Width="80" Margin="3" Click="Button_Click_11" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Value" Width="80" Margin="5"/>
+                                <TextBox Text="{Binding SelectedDrawer.Value}" Width="100" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Width="300" Height="150" Margin="5">
+                                <ListView  Width="Auto" x:Name="lsvDrawer" SelectedValue="{Binding SelectedDrawer}" SelectionChanged="lsvDrawer_SelectionChanged" Height="150" ItemsSource="{Binding Drawers}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Value" Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Value}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Delete" Width="60">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Content="Delete" Click="Button_Click_12" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,56 @@
+﻿<Window x:Class="FrameManager.ManageSpecies"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrameManager"
+        mc:Ignorable="d"
+        Title="Manage Species" Height="300" Width="430" FontFamily="Tahoma" FontSize="14" FontWeight="Bold">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ThemeFile.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,20,15,10">
+                <TextBlock Text="Name" Width="80" Margin="5"/>
+                <TextBox Text="{Binding Name}" Width="100" Margin="5" GotFocus="TextBox_GotFocus"/>
+                <Button Content="Add as New" Width="100" Click="Button_Click_1" Margin="3"/>
+                <Button Content="Update" Width="80" Margin="3" Click="Button_Click_3"/>
+            </StackPanel>
+            <StackPanel Width="250" Height="150" Margin="5">
+                <ListView  Width="Auto" x:Name="lsvSpecies" SelectedValue="{Binding _selectedSpecies}" SelectionChanged="lsvSpecies_SelectionChanged" Height="150">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="160">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Delete" Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Delete" Click="Button_Click"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </StackPanel>
+            <Button Content="Close" Width="100" Click="Button_Click_2"/>
+        </StackPanel>
+    </Grid>
+</Window>

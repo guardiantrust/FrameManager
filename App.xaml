@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:FrameManager"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="ThemeFile.xaml">
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameManager", "FrameManager.csproj", "{1259B68E-994B-476C-91BB-C79CE3644F00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "..\DataLayer\DataLayer.csproj", "{05085527-52E6-4C3D-BC27-A2A057133943}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install Frame Manager", "..\Install Frame Manager\Install Frame Manager.vdproj", "{B66858E9-E3F8-46E2-8BA7-E865612BF626}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,20 @@ Global
 		{1259B68E-994B-476C-91BB-C79CE3644F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1259B68E-994B-476C-91BB-C79CE3644F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1259B68E-994B-476C-91BB-C79CE3644F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05085527-52E6-4C3D-BC27-A2A057133943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05085527-52E6-4C3D-BC27-A2A057133943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05085527-52E6-4C3D-BC27-A2A057133943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05085527-52E6-4C3D-BC27-A2A057133943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B66858E9-E3F8-46E2-8BA7-E865612BF626}.Debug|Any CPU.ActiveCfg = Debug
+		{B66858E9-E3F8-46E2-8BA7-E865612BF626}.Debug|Any CPU.Build.0 = Debug
+		{B66858E9-E3F8-46E2-8BA7-E865612BF626}.Release|Any CPU.ActiveCfg = Release
+		{B66858E9-E3F8-46E2-8BA7-E865612BF626}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.Database.5.0.505.0\lib\NET35;packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

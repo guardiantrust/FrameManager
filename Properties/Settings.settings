@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrameManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DataLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\FrameManager\DB</Value>
+    </Setting>
+    <Setting Name="TenonLength" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.5625</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
